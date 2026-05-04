@@ -1,4 +1,4 @@
-namespace mini_shop_backend;
+namespace mini_shop_backend_net.Domain;
 
 public class Order : BaseEntity
 {

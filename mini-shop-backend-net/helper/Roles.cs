@@ -1,4 +1,4 @@
-using mini_shop_backend.Enums;
+using mini_shop_backend_net.Domain.Enums;
 
 namespace mini_shop_backend_net.helper;
 

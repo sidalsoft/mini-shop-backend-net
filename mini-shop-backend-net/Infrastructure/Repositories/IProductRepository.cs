@@ -1,6 +1,7 @@
-using mini_shop_backend;
+using mini_shop_backend_net;
+using mini_shop_backend_net.Domain;
 
-namespace mini_shop_backend_net.Infrastructure.Repositories.Repositories;
+namespace mini_shop_backend_net.Infrastructure.Repositories;
 
 public interface IProductRepository : IRepository<Product>
 {

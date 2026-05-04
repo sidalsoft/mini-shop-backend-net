@@ -1,19 +1,19 @@
-using Microsoft.EntityFrameworkCore;
-using mini_shop_backend_net.Application.Services;
-using mini_shop_backend_net.Infrastructure;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using mini_shop_backend_net.Application.Validators;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
-using mini_shop_backend_net.Middleware;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using mini_shop_backend_net.Application.Common.Exceptions;
+using mini_shop_backend_net.Application.Services;
+using mini_shop_backend_net.Application.Validators;
+using mini_shop_backend_net.Infrastructure;
 using mini_shop_backend_net.Infrastructure.Repositories;
-using mini_shop_backend_net.Infrastructure.Repositories.Repositories;
+using mini_shop_backend_net.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +27,6 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1"
     });
 
-    // JWT в Swagger
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -60,7 +59,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = false, // можно включить в проде
+            ValidateIssuer = false,
             ValidateAudience = false,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
@@ -80,12 +79,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 context.HandleResponse();
 
                 var response = new ErrorResponse
-                {
-                    ErrorCode = "UNAUTHORIZED",
-                    Message = "Не авторизован",
-                    Timestamp = DateTime.UtcNow,
-                    Path = context.Request.Path
-                };
+                (
+                    "UNAUTHORIZED",
+                    "Не авторизован",
+                    DateTime.UtcNow,
+                    context.Request.Path
+                );
 
                 context.Response.StatusCode = 401;
                 context.Response.ContentType = "application/json";
@@ -95,13 +94,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
             OnForbidden = context =>
             {
-                var response = new ErrorResponse
-                {
-                    ErrorCode = "FORBIDDEN",
-                    Message = "Нет доступа",
-                    Timestamp = DateTime.UtcNow,
-                    Path = context.Request.Path
-                };
+                var response = new ErrorResponse(
+                    "FORBIDDEN",
+                    "Нет доступа",
+                    DateTime.UtcNow,
+                    context.Request.Path
+                );
 
                 context.Response.StatusCode = 403;
                 context.Response.ContentType = "application/json";
@@ -119,10 +117,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .WithOrigins(
-                "http://localhost:3000",
-                "http://localhost:5173"
-            )
+            .AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -131,6 +126,11 @@ builder.Services.AddCors(options =>
 // -------------------- Validation --------------------
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateCategoryValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateOrderValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<AddToCartValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<LoginValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidator>();
 
 // -------------------- Validation Response --------------------
 builder.Services.Configure<ApiBehaviorOptions>(options =>
@@ -144,12 +144,12 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
             .ToList();
 
         var response = new ErrorResponse
-        {
-            ErrorCode = "VALIDATION_ERROR",
-            Message = string.Join("; ", errors),
-            Timestamp = DateTime.UtcNow,
-            Path = context.HttpContext.Request.Path
-        };
+        (
+            "VALIDATION_ERROR",
+            string.Join("; ", errors),
+            DateTime.UtcNow,
+            context.HttpContext.Request.Path
+        );
 
         return new BadRequestObjectResult(response);
     };
@@ -160,9 +160,9 @@ builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNamingPolicy =
-            System.Text.Json.JsonNamingPolicy.CamelCase;
+            JsonNamingPolicy.CamelCase;
         options.JsonSerializerOptions.Encoder =
-            System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+            JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
     });
 
 // -------------------- Services --------------------
@@ -200,5 +200,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    await DbSeeder.SeedAdminAsync(scope.ServiceProvider);
+}
 
 app.Run();

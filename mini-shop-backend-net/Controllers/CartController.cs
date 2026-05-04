@@ -1,11 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using mini_shop_backend_net.Application.DTOs.Cart;
 using mini_shop_backend_net.Application.Services;
 
 namespace mini_shop_backend_net.Controllers;
-
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 [ApiController]
 [Route("api/cart")]
@@ -39,7 +37,7 @@ public class CartController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{productId}")]
+    [HttpDelete("{productId:guid}")]
     public async Task<IActionResult> Remove(Guid productId)
     {
         await _service.Remove(GetUserId(), productId);

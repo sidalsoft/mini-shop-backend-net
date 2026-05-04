@@ -1,9 +1,6 @@
-using mini_shop_backend_net.Infrastructure.Repositories.Repositories;
-using mini_shop_backend;
+using mini_shop_backend_net.Domain;
 
 namespace mini_shop_backend_net.Infrastructure.Repositories;
-
-using Microsoft.EntityFrameworkCore;
 
 public class ProductRepository : Repository<Product>, IProductRepository
 {

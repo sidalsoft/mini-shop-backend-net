@@ -1,5 +1,4 @@
 using mini_shop_backend_net.Application.DTOs.Cart;
-using mini_shop_backend;
 
 namespace mini_shop_backend_net.Application.Services;
 

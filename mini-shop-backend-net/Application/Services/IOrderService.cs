@@ -1,6 +1,5 @@
 using mini_shop_backend_net.Application.DTOs;
 using mini_shop_backend_net.Application.DTOs.Order;
-using mini_shop_backend;
 
 namespace mini_shop_backend_net.Application.Services;
 

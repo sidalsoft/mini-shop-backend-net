@@ -1,4 +1,4 @@
-namespace mini_shop_backend;
+namespace mini_shop_backend_net.Domain;
 
 public class OrderItem : BaseEntity
 {
@@ -7,7 +7,7 @@ public class OrderItem : BaseEntity
 
     public Guid ProductId { get; set; }
 
-    public string ProductName { get; set; } // snapshot
+    public string ProductName { get; set; }
     public decimal Price { get; set; }
 
     public int Quantity { get; set; }

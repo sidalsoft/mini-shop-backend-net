@@ -1,17 +1,15 @@
-using mini_shop_backend_net.Application.Common;
-using mini_shop_backend_net.Application.Common.Exceptions;
-using mini_shop_backend_net.Application.DTOs.User;
-using mini_shop_backend_net.Infrastructure;
-using mini_shop_backend;
-using mini_shop_backend.Enums;
-
-namespace mini_shop_backend_net.Application.Services;
-
-using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using mini_shop_backend_net.Application.Common.Exceptions;
+using mini_shop_backend_net.Application.DTOs.User;
+using mini_shop_backend_net.Domain;
+using mini_shop_backend_net.Domain.Enums;
+using mini_shop_backend_net.Infrastructure;
+
+namespace mini_shop_backend_net.Application.Services;
 
 public class AuthService : IAuthService
 {
@@ -27,7 +25,7 @@ public class AuthService : IAuthService
     public async Task<string> Register(RegisterDto dto)
     {
         var exists = await _context.Users.AnyAsync(x => x.Email == dto.Email);
-        if (exists) throw new AppException("Пользователь уже существует");;
+        if (exists) throw new AppException("Пользователь уже существует");
 
         var user = new User
         {

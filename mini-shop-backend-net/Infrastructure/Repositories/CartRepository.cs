@@ -1,4 +1,5 @@
-using mini_shop_backend;
+using mini_shop_backend_net;
+using mini_shop_backend_net.Domain;
 
 namespace mini_shop_backend_net.Infrastructure.Repositories;
 
@@ -26,7 +27,7 @@ public class CartRepository : Repository<Cart>, ICartRepository
 
     public async Task<Cart> GetOrCreateAsync(Guid userId, bool ignoreDeletedProduct = true)
     {
-        Cart cart = null;
+        Cart? cart;
         if (ignoreDeletedProduct)
         {
             cart = await _db.Include(c => c.Items)

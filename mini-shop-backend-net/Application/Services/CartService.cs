@@ -1,8 +1,7 @@
 using mini_shop_backend_net.Application.Common.Exceptions;
 using mini_shop_backend_net.Application.DTOs.Cart;
 using mini_shop_backend_net.Infrastructure.Repositories;
-using mini_shop_backend_net.Infrastructure.Repositories.Repositories;
-using mini_shop_backend;
+using mini_shop_backend_net.Domain;
 
 namespace mini_shop_backend_net.Application.Services;
 
@@ -62,11 +61,10 @@ public class CartService : ICartService
 
         var product = await _productRepo.GetByIdAsync(dto.ProductId);
         if (product == null || product.DeletedAt != null)
-            throw new AppException("Товар не найден", 404);
+            throw new NotFoundException("Товар не найден");
 
         var cart = await _cartRepo.GetOrCreateAsync(userId);
 
-        // 🔥 важно — ищем даже удалённые
         var item = cart.Items
             .FirstOrDefault(x => x.ProductId == dto.ProductId);
 
@@ -78,7 +76,6 @@ public class CartService : ICartService
         {
             cart.Items.Add(new CartItem
             {
-                //Id = Guid.NewGuid(),
                 CartId = cart.Id,
                 ProductId = product.Id,
                 Quantity = dto.Quantity
@@ -96,7 +93,7 @@ public class CartService : ICartService
         var item = cart.Items.FirstOrDefault(x => x.ProductId == productId);
 
         if (item == null)
-            throw new AppException("Товар не найден в корзине", 404);
+            throw new NotFoundException("Товар не найден в корзине");
 
         if (quantity <= 0)
         {

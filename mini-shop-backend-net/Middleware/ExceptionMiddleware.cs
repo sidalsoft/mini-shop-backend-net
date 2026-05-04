@@ -6,7 +6,6 @@ namespace mini_shop_backend_net.Middleware;
 using System.Net;
 using System.Text.Json;
 
-
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
@@ -43,12 +42,12 @@ public class ExceptionMiddleware
         }
 
         var response = new ErrorResponse
-        {
-            ErrorCode = errorCode,
-            Message = message,
-            Timestamp = DateTime.UtcNow,
-            Path = context.Request.Path
-        };
+        (
+            errorCode,
+            message,
+            DateTime.UtcNow,
+            context.Request.Path
+        );
 
         var result = JsonSerializer.Serialize(response, new JsonSerializerOptions
         {

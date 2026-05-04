@@ -1,14 +1,10 @@
-using mini_shop_backend_net.Application.Common;
+using Microsoft.EntityFrameworkCore;
 using mini_shop_backend_net.Application.Common.Exceptions;
 using mini_shop_backend_net.Application.DTOs;
-using mini_shop_backend_net.Infrastructure;
+using mini_shop_backend_net.Domain;
 using mini_shop_backend_net.Infrastructure.Repositories;
-using mini_shop_backend_net.Infrastructure.Repositories.Repositories;
-using mini_shop_backend;
 
 namespace mini_shop_backend_net.Application.Services;
-
-using Microsoft.EntityFrameworkCore;
 
 public class ProductService : IProductService
 {
@@ -24,13 +20,11 @@ public class ProductService : IProductService
 
     public async Task<PagedResult<ProductDto>> GetAll(ProductQuery query)
     {
-        // ✅ нормализация
         query.Page = Math.Max(query.Page, 1);
         query.PageSize = Math.Min(Math.Max(query.PageSize, 1), 50);
 
         var dbQuery = _repo.Query().AsQueryable();
 
-        // 🔍 Filtering
         if (!string.IsNullOrEmpty(query.Name))
         {
             dbQuery = dbQuery.Where(p =>
@@ -52,12 +46,10 @@ public class ProductService : IProductService
             dbQuery = dbQuery.Where(p => p.CategoryId == query.CategoryId.Value);
         }
 
-        // 🔄 Sorting
         dbQuery = ApplySorting(dbQuery, query);
 
         var totalCount = await dbQuery.CountAsync();
 
-        // 📄 Pagination
         var items = await dbQuery
             .Skip((query.Page - 1) * query.PageSize)
             .Take(query.PageSize)
@@ -105,7 +97,7 @@ public class ProductService : IProductService
         var categoryExists = await _categoryRepo.Exists(dto.CategoryId);
 
         if (!categoryExists)
-            throw new AppException("Категория не найдена", 404);
+            throw new NotFoundException("Категория не найдена");
 
         var product = new Product
         {
@@ -164,7 +156,7 @@ public class ProductService : IProductService
                 ? query.OrderByDescending(p => p.CreatedAt)
                 : query.OrderBy(p => p.CreatedAt),
 
-            _ => query.OrderByDescending(p => p.CreatedAt) // default
+            _ => query.OrderByDescending(p => p.CreatedAt)
         };
     }
 }

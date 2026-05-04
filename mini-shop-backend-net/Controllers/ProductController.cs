@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using mini_shop_backend_net.Application.DTOs;
 using mini_shop_backend_net.Application.Services;
 using mini_shop_backend_net.helper;
-using mini_shop_backend.Enums;
 
 namespace mini_shop_backend_net.Controllers;
-
-using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/products")]
@@ -26,7 +24,7 @@ public class ProductController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
         var product = await _service.GetById(id);
@@ -43,7 +41,7 @@ public class ProductController : ControllerBase
         return Created("", null);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:guid}")]
     [Authorize(Roles = Roles.Admin)]
     public async Task<IActionResult> Update(Guid id, CreateProductDto dto)
     {
@@ -51,7 +49,7 @@ public class ProductController : ControllerBase
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:guid}")]
     [Authorize(Roles = Roles.Admin)]
     public async Task<IActionResult> Delete(Guid id)
     {

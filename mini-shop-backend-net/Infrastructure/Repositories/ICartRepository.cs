@@ -1,4 +1,5 @@
-using mini_shop_backend;
+using mini_shop_backend_net;
+using mini_shop_backend_net.Domain;
 
 namespace mini_shop_backend_net.Infrastructure.Repositories;
 

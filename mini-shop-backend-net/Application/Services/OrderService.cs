@@ -4,7 +4,7 @@ using mini_shop_backend_net.Application.DTOs;
 using mini_shop_backend_net.Application.DTOs.Order;
 using mini_shop_backend_net.Infrastructure;
 using mini_shop_backend_net.Infrastructure.Repositories;
-using mini_shop_backend;
+using mini_shop_backend_net.Domain;
 
 namespace mini_shop_backend_net.Application.Services;
 
@@ -47,7 +47,7 @@ public class OrderService : IOrderService
             var product = cartItem.Product;
 
             if (product == null || product.DeletedAt != null)
-                throw new AppException("Товар недоступен", 400);
+                throw new AppException("Товар недоступен");
 
             var itemTotal = product.Price * cartItem.Quantity;
 
@@ -67,7 +67,6 @@ public class OrderService : IOrderService
 
         await _context.Orders.AddAsync(order);
 
-        // 🔥 очищаем корзину через aggregate
         cart.Items.Clear();
 
         await _context.SaveChangesAsync();
