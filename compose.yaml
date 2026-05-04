@@ -4,4 +4,9 @@
     build:
       context: .
       dockerfile: mini-shop-backend-net/Dockerfile
+    environment:
+      - JWT_KEY=your-very-long-secret-key-at-least-32-bytes!
+      - ADMIN_EMAIL=admin@gmail.com
+      - ADMIN_PASSWORD=admin
+      - DB_CONNECTION=Host=db;Port=5432;Database=mini_shop_net_db;Username=postgres;Password=postgres
 

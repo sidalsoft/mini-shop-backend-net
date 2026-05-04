@@ -14,8 +14,11 @@ using mini_shop_backend_net.Application.Validators;
 using mini_shop_backend_net.Infrastructure;
 using mini_shop_backend_net.Infrastructure.Repositories;
 using mini_shop_backend_net.Middleware;
+using DotNetEnv;
 
+Env.Load();
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddEnvironmentVariables();
 
 // -------------------- Swagger --------------------
 builder.Services.AddEndpointsApiExplorer();
@@ -179,7 +182,7 @@ builder.Services.AddScoped<ICartRepository, CartRepository>();
 
 // -------------------- Database --------------------
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+    options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION")));
 
 var app = builder.Build();
 

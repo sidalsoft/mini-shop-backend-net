@@ -17,16 +17,17 @@ public static class DbSeeder
 
         if (adminExists)
             return;
-
+        var email = Environment.GetEnvironmentVariable("ADMIN_EMAIL");
+        var password = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
         var admin = new User
         {
             Id = Guid.NewGuid(),
-            Email = "admin@gmail.com",
+            Email = email,
             Role = UserRole.ROLE_ADMIN,
             CreatedAt = DateTime.UtcNow
         };
 
-        admin.PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin");
+        admin.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
 
         context.Users.Add(admin);
         await context.SaveChangesAsync();
