@@ -1,0 +1,6 @@
+@mini_shop_backend_net_HostAddress = http://localhost:5180
+
+GET {{mini_shop_backend_net_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,7 @@
+﻿services:
+  mini-shop-backend-net:
+    image: mini-shop-backend-net
+    build:
+      context: .
+      dockerfile: mini-shop-backend-net/Dockerfile
+
