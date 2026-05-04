@@ -204,6 +204,24 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+var retries = 5;
+
+while (retries > 0)
+{
+    try
+    {
+        using var scope = app.Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        db.Database.Migrate();
+        break;
+    }
+    catch
+    {
+        retries--;
+        Thread.Sleep(2000);
+    }
+}
+
 using (var scope = app.Services.CreateScope())
 {
     await DbSeeder.SeedAdminAsync(scope.ServiceProvider);
