@@ -1,4 +1,4 @@
-namespace mini_shop_backend_net.Application.DTOs.User;
+namespace miniShopBackendNet.Application.DTOs.User;
 
 public class LoginDto
 {

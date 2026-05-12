@@ -1,7 +1,7 @@
-using mini_shop_backend_net.Application.DTOs;
-using mini_shop_backend_net.Application.DTOs.Order;
+using miniShopBackendNet.Application.DTOs;
+using miniShopBackendNet.Application.DTOs.Order;
 
-namespace mini_shop_backend_net.Application.Services;
+namespace miniShopBackendNet.Application.Services;
 
 public interface IOrderService
 {

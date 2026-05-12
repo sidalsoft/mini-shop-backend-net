@@ -1,4 +1,4 @@
-namespace mini_shop_backend_net.Application.DTOs.Order;
+namespace miniShopBackendNet.Application.DTOs.Order;
 
 public record OrderItemDto(
     Guid ProductId,

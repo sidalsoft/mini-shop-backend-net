@@ -1,7 +1,7 @@
-using mini_shop_backend_net.Application.Common;
-using mini_shop_backend_net.Application.Common.Exceptions;
+using miniShopBackendNet.Application.Common;
+using miniShopBackendNet.Application.Common.Exceptions;
 
-namespace mini_shop_backend_net.Middleware;
+namespace miniShopBackendNet.Middleware;
 
 using System.Net;
 using System.Text.Json;

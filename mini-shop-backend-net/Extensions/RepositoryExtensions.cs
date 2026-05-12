@@ -1,6 +1,6 @@
-using mini_shop_backend_net.Infrastructure.Repositories;
+using miniShopBackendNet.Infrastructure.Repositories;
 
-namespace mini_shop_backend_net.Extensions;
+namespace miniShopBackendNet.Extensions;
 
 public static class RepositoryExtensions
 {

@@ -2,9 +2,9 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using mini_shop_backend_net.Application.Common.Exceptions;
+using miniShopBackendNet.Application.Common.Exceptions;
 
-namespace mini_shop_backend_net.Extensions;
+namespace miniShopBackendNet.Extensions;
 
 public static class AuthExtensions
 {

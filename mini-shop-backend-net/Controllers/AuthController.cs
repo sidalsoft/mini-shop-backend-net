@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using mini_shop_backend_net.Application.DTOs.User;
-using mini_shop_backend_net.Application.Services;
+using miniShopBackendNet.Application.DTOs.User;
+using miniShopBackendNet.Application.Services;
 
-namespace mini_shop_backend_net.Controllers;
+namespace miniShopBackendNet.Controllers;
 
 [ApiController]
 [Route("api/auth")]

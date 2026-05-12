@@ -1,6 +1,6 @@
-using mini_shop_backend_net.Application.DTOs.User;
+using miniShopBackendNet.Application.DTOs.User;
 
-namespace mini_shop_backend_net.Application.Services;
+namespace miniShopBackendNet.Application.Services;
 
 public interface IAuthService
 {

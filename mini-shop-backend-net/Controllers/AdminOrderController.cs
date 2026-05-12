@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using mini_shop_backend_net.Application.DTOs.Order;
-using mini_shop_backend_net.Application.Services;
-using mini_shop_backend_net.helper;
+using miniShopBackendNet.Application.DTOs.Order;
+using miniShopBackendNet.Application.Services;
+using miniShopBackendNet.helper;
 
-namespace mini_shop_backend_net.Controllers;
+namespace miniShopBackendNet.Controllers;
 
 [ApiController]
 [Route("api/admin/orders")]

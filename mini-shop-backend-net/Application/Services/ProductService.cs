@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using mini_shop_backend_net.Application.Common.Exceptions;
-using mini_shop_backend_net.Application.DTOs;
-using mini_shop_backend_net.Domain;
-using mini_shop_backend_net.Infrastructure.Repositories;
+using miniShopBackendNet.Application.Common.Exceptions;
+using miniShopBackendNet.Application.DTOs;
+using miniShopBackendNet.Domain;
+using miniShopBackendNet.Infrastructure.Repositories;
 
-namespace mini_shop_backend_net.Application.Services;
+namespace miniShopBackendNet.Application.Services;
 
 public class ProductService : IProductService
 {
@@ -138,7 +138,7 @@ public class ProductService : IProductService
         await _repo.SaveChangesAsync();
     }
 
-    private IQueryable<Product> ApplySorting(IQueryable<Product> query, ProductQuery request)
+    private static IQueryable<Product> ApplySorting(IQueryable<Product> query, ProductQuery request)
     {
         var isDesc = request.SortDirection?.ToLower() == "desc";
 

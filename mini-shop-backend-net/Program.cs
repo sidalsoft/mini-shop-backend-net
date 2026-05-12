@@ -1,8 +1,8 @@
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using DotNetEnv;
-using mini_shop_backend_net.Extensions;
-using mini_shop_backend_net.Middleware;
+using miniShopBackendNet.Extensions;
+using miniShopBackendNet.Middleware;
 
 Env.Load();
 

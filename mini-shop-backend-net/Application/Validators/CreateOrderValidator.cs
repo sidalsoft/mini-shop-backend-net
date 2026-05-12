@@ -1,6 +1,6 @@
-using mini_shop_backend_net.Application.DTOs.Order;
+using miniShopBackendNet.Application.DTOs.Order;
 
-namespace mini_shop_backend_net.Application.Validators;
+namespace miniShopBackendNet.Application.Validators;
 
 using FluentValidation;
 

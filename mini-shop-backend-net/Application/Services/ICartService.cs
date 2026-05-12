@@ -1,6 +1,6 @@
-using mini_shop_backend_net.Application.DTOs.Cart;
+using miniShopBackendNet.Application.DTOs.Cart;
 
-namespace mini_shop_backend_net.Application.Services;
+namespace miniShopBackendNet.Application.Services;
 
 public interface ICartService
 {

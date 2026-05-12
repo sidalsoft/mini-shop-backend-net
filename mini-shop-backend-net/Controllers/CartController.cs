@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using mini_shop_backend_net.Application.DTOs.Cart;
-using mini_shop_backend_net.Application.Services;
+using miniShopBackendNet.Application.DTOs.Cart;
+using miniShopBackendNet.Application.Services;
 
-namespace mini_shop_backend_net.Controllers;
+namespace miniShopBackendNet.Controllers;
 
 [ApiController]
 [Route("api/cart")]

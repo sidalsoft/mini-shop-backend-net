@@ -1,4 +1,4 @@
-namespace mini_shop_backend_net.Application.DTOs;
+namespace miniShopBackendNet.Application.DTOs;
 
 public class PagedResult<T>
 {

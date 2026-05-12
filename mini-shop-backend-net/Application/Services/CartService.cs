@@ -1,9 +1,9 @@
-using mini_shop_backend_net.Application.Common.Exceptions;
-using mini_shop_backend_net.Application.DTOs.Cart;
-using mini_shop_backend_net.Infrastructure.Repositories;
-using mini_shop_backend_net.Domain;
+using miniShopBackendNet.Application.Common.Exceptions;
+using miniShopBackendNet.Application.DTOs.Cart;
+using miniShopBackendNet.Infrastructure.Repositories;
+using miniShopBackendNet.Domain;
 
-namespace mini_shop_backend_net.Application.Services;
+namespace miniShopBackendNet.Application.Services;
 
 public class CartService : ICartService
 {

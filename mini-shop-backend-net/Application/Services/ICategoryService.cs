@@ -1,6 +1,6 @@
-using mini_shop_backend_net.Application.DTOs.Category;
+using miniShopBackendNet.Application.DTOs.Category;
 
-namespace mini_shop_backend_net.Application.Services;
+namespace miniShopBackendNet.Application.Services;
 
 public interface ICategoryService
 {

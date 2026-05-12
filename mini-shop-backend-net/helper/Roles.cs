@@ -1,6 +1,6 @@
-using mini_shop_backend_net.Domain.Enums;
+using miniShopBackendNet.Domain.Enums;
 
-namespace mini_shop_backend_net.helper;
+namespace miniShopBackendNet.helper;
 
 public static class Roles
 {

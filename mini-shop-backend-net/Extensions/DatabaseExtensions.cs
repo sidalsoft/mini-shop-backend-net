@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using mini_shop_backend_net.Infrastructure;
+using miniShopBackendNet.Infrastructure;
 
-namespace mini_shop_backend_net.Extensions;
+namespace miniShopBackendNet.Extensions;
 
 public static class DatabaseExtensions
 {

@@ -1,9 +1,9 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
-using mini_shop_backend_net.Application.Validators;
+using miniShopBackendNet.Application.Validators;
 
-namespace mini_shop_backend_net.Extensions;
+namespace miniShopBackendNet.Extensions;
 
 public static class ValidationExtensions
 {

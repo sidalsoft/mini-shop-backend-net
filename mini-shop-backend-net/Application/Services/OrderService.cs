@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using mini_shop_backend_net.Application.Common.Exceptions;
-using mini_shop_backend_net.Application.DTOs;
-using mini_shop_backend_net.Application.DTOs.Order;
-using mini_shop_backend_net.Infrastructure;
-using mini_shop_backend_net.Infrastructure.Repositories;
-using mini_shop_backend_net.Domain;
+using miniShopBackendNet.Application.Common.Exceptions;
+using miniShopBackendNet.Application.DTOs;
+using miniShopBackendNet.Application.DTOs.Order;
+using miniShopBackendNet.Infrastructure;
+using miniShopBackendNet.Infrastructure.Repositories;
+using miniShopBackendNet.Domain;
 
-namespace mini_shop_backend_net.Application.Services;
+namespace miniShopBackendNet.Application.Services;
 
 public class OrderService : IOrderService
 {

@@ -1,4 +1,4 @@
-namespace mini_shop_backend_net.Application.Common.Exceptions;
+namespace miniShopBackendNet.Application.Common.Exceptions;
 
 public class AppException : Exception
 {

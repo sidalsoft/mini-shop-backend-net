@@ -1,6 +1,6 @@
-using mini_shop_backend_net.Application.DTOs;
+using miniShopBackendNet.Application.DTOs;
 
-namespace mini_shop_backend_net.Application.Services;
+namespace miniShopBackendNet.Application.Services;
 
 public interface IProductService
 {

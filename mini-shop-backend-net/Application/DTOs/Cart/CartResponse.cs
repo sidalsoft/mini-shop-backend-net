@@ -1,4 +1,4 @@
-namespace mini_shop_backend_net.Application.DTOs.Cart;
+namespace miniShopBackendNet.Application.DTOs.Cart;
 
 public record CartResponse(
     Guid Id,

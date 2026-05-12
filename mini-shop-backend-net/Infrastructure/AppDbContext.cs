@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using mini_shop_backend_net;
-using mini_shop_backend_net.Domain;
+using miniShopBackendNet;
+using miniShopBackendNet.Domain;
 
-namespace mini_shop_backend_net.Infrastructure;
+namespace miniShopBackendNet.Infrastructure;
 
 public class AppDbContext : DbContext
 {

@@ -1,4 +1,4 @@
-namespace mini_shop_backend_net.Domain;
+namespace miniShopBackendNet.Domain;
 
 public enum OrderStatus
 {

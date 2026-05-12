@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using mini_shop_backend_net.Domain;
-using mini_shop_backend_net.Domain.Enums;
+using miniShopBackendNet.Domain;
+using miniShopBackendNet.Domain.Enums;
 
-namespace mini_shop_backend_net.Infrastructure;
+namespace miniShopBackendNet.Infrastructure;
 
 public static class DbSeeder
 {

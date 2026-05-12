@@ -3,23 +3,21 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using mini_shop_backend_net.Application.Common.Exceptions;
-using mini_shop_backend_net.Application.DTOs.User;
-using mini_shop_backend_net.Domain;
-using mini_shop_backend_net.Domain.Enums;
-using mini_shop_backend_net.Infrastructure;
+using miniShopBackendNet.Application.Common.Exceptions;
+using miniShopBackendNet.Application.DTOs.User;
+using miniShopBackendNet.Domain;
+using miniShopBackendNet.Domain.Enums;
+using miniShopBackendNet.Infrastructure;
 
-namespace mini_shop_backend_net.Application.Services;
+namespace miniShopBackendNet.Application.Services;
 
 public class AuthService : IAuthService
 {
     private readonly AppDbContext _context;
-    private readonly IConfiguration _config;
 
-    public AuthService(AppDbContext context, IConfiguration config)
+    public AuthService(AppDbContext context)
     {
         _context = context;
-        _config = config;
     }
 
     public async Task<string> Register(RegisterDto dto)
@@ -52,7 +50,7 @@ public class AuthService : IAuthService
         return GenerateJwt(user);
     }
 
-    private string GenerateJwt(User user)
+    private static string GenerateJwt(User user)
     {
         var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
         var key = new SymmetricSecurityKey(

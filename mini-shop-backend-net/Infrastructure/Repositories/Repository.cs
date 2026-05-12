@@ -1,4 +1,4 @@
-namespace mini_shop_backend_net.Infrastructure.Repositories;
+namespace miniShopBackendNet.Infrastructure.Repositories;
 
 using Microsoft.EntityFrameworkCore;
 
