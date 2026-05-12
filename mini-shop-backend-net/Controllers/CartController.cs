@@ -8,46 +8,40 @@ namespace mini_shop_backend_net.Controllers;
 [ApiController]
 [Route("api/cart")]
 [Authorize]
-public class CartController : ControllerBase
+public class CartController(ICartService service) : ControllerBase
 {
-    private readonly ICartService _service;
-
-    public CartController(ICartService service)
-    {
-        _service = service;
-    }
 
     private Guid GetUserId() => Guid.Parse(User.FindFirst("sub").Value);
 
     [HttpGet]
     public async Task<IActionResult> Get()
-        => Ok(await _service.GetCart(GetUserId()));
+        => Ok(await service.GetCart(GetUserId()));
 
     [HttpPost]
     public async Task<IActionResult> Add(AddToCartDto dto)
     {
-        await _service.AddToCart(GetUserId(), dto);
+        await service.AddToCart(GetUserId(), dto);
         return NoContent();
     }
 
     [HttpPut]
     public async Task<IActionResult> Update(UpdateCartDto dto)
     {
-        await _service.UpdateQuantity(GetUserId(), dto.ProductId, dto.Quantity);
+        await service.UpdateQuantity(GetUserId(), dto.ProductId, dto.Quantity);
         return NoContent();
     }
 
     [HttpDelete("{productId:guid}")]
     public async Task<IActionResult> Remove(Guid productId)
     {
-        await _service.Remove(GetUserId(), productId);
+        await service.Remove(GetUserId(), productId);
         return NoContent();
     }
 
     [HttpDelete]
     public async Task<IActionResult> Clear()
     {
-        await _service.Clear(GetUserId());
+        await service.Clear(GetUserId());
         return NoContent();
     }
 }
